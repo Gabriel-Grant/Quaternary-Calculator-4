@@ -19,7 +19,7 @@ class calculator extends JFrame implements ActionListener {
         entryField = new JTextField(16);
         entryField.setEditable(false);
 
-        JButton b0, b1, b2, b3, beq, ba, bs, bd, bm, bsqr, bsq, btog;
+        JButton b0, b1, b2, b3, beq, ba, bs, bd, bm, bSqr, bSq, bTog;
 
         b0 = new JButton("0");
         b1 = new JButton("1");
@@ -30,9 +30,9 @@ class calculator extends JFrame implements ActionListener {
         bs = new JButton("-");
         bd = new JButton("/");
         bm = new JButton("*");
-        bsqr = new JButton("sqrt(x)");
-        bsq = new JButton("x^2");
-        btog = new JButton("dec");
+        bSqr = new JButton("sqrt(x)");
+        bSq = new JButton("x^2");
+        bTog = new JButton("dec");
 
         JPanel calcPanel = new JPanel();
 
@@ -45,9 +45,9 @@ class calculator extends JFrame implements ActionListener {
         bs.addActionListener(calc);
         bd.addActionListener(calc);
         bm.addActionListener(calc);
-        bsqr.addActionListener(calc);
-        bsq.addActionListener(calc);
-        btog.addActionListener(calc);
+        bSqr.addActionListener(calc);
+        bSq.addActionListener(calc);
+        bTog.addActionListener(calc);
 
         calcPanel.add(entryField);
         calcPanel.add(b1);
@@ -58,10 +58,10 @@ class calculator extends JFrame implements ActionListener {
         calcPanel.add(bs);
         calcPanel.add(bm);
         calcPanel.add(bd);
-        calcPanel.add(bsqr);
-        calcPanel.add(bsq);
+        calcPanel.add(bSqr);
+        calcPanel.add(bSq);
         calcPanel.add(beq);
-        calcPanel.add(btog);
+        calcPanel.add(bTog);
 
         calcPanel.setBackground(Color.pink);
 
