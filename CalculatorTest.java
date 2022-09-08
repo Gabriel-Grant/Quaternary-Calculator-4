@@ -21,7 +21,7 @@ public class CalculatorTest {
     @Test
     public void additionTest() throws Exception {
         String expected = "1";
-        String actual = calc.twoValueOperation("0", '+', "1");
+        String actual = calc.twoValueOperation("0", "+", "1");
         assertEquals(expected, actual);
     }
 
@@ -29,56 +29,56 @@ public class CalculatorTest {
     @Test
     public void additionTest2() throws Exception {
         String expected = "10";
-        String actual = calc.twoValueOperation("3", '+', "1");
+        String actual = calc.twoValueOperation("3", "+", "1");
         assertEquals(expected, actual);
     }
 
     @Test
     public void additionLargeNumberTest() throws Exception {
         String expected = "2303";
-        String actual = calc.twoValueOperation("1111", '+', "1132");
+        String actual = calc.twoValueOperation("1111", "+", "1132");
         assertEquals(expected, actual);
     }
 
     @Test
     public void subtractionTest() throws Exception {
         String expected = "10";
-        String actual = calc.twoValueOperation("22", '-', "12");
+        String actual = calc.twoValueOperation("22", "-", "12");
         assertEquals(expected, actual);
     }
 
     @Test
     public void subtractionTest2() throws Exception {
         String expected = "2";
-        String actual = calc.twoValueOperation("13", '-', "11");
+        String actual = calc.twoValueOperation("13", "-", "11");
         assertEquals(expected, actual);
     }
 
     @Test
     public void subtractionLargeNumberTest() throws Exception {
         String expected = "1210";
-        String actual = calc.twoValueOperation("2101", '-', "231");
+        String actual = calc.twoValueOperation("2101", "-", "231");
         assertEquals(expected, actual);
     }
 
     @Test
     public void multiplicationTest() throws Exception {
         String expected = "210";
-        String actual = calc.twoValueOperation("21", '*', "10");
+        String actual = calc.twoValueOperation("21", "*", "10");
         assertEquals(expected, actual);
     }
 
     @Test
     public void divisionTest() throws Exception {
         String expected = "13";
-        String actual = calc.twoValueOperation("111", '/', "3");
+        String actual = calc.twoValueOperation("111", "/", "3");
         assertEquals(expected, actual);
     }
 
     @Test
     public void divisionByZeroTest() throws Exception {
         ArithmeticException exception = assertThrows(ArithmeticException.class, () ->{
-                calc.twoValueOperation("10", '/', "0");
+                calc.twoValueOperation("10", "/", "0");
         }, "ArithmeticException was expected");
     }
 

@@ -8,15 +8,15 @@ public class CalculatorLogic {
         return Integer.toString(Integer.parseInt(quadNumber, 4), 10);
     }
 
-    public String twoValueOperation(String firstValue, char operation, String secondValue) throws Exception {
+    public String twoValueOperation(String firstValue, String operation, String secondValue) throws Exception {
         int firstValueDecimal = Integer.parseInt(toDecimal(firstValue));
         int secondValueDecimal = Integer.parseInt(toDecimal(secondValue));
 
         return switch (operation) {
-            case '+' -> toQuad(Integer.toString(firstValueDecimal + secondValueDecimal));
-            case '-' -> toQuad(Integer.toString(firstValueDecimal - secondValueDecimal));
-            case '*' -> toQuad(Integer.toString(firstValueDecimal * secondValueDecimal));
-            case '/' -> toQuad(Integer.toString(firstValueDecimal / secondValueDecimal));
+            case "+" -> toQuad(Integer.toString(firstValueDecimal + secondValueDecimal));
+            case "-" -> toQuad(Integer.toString(firstValueDecimal - secondValueDecimal));
+            case "*" -> toQuad(Integer.toString(firstValueDecimal * secondValueDecimal));
+            case "/" -> toQuad(Integer.toString(firstValueDecimal / secondValueDecimal));
             default -> throw new Exception("Must be a valid operation");
         };
     }

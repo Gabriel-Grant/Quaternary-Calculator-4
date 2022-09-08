@@ -1,10 +1,14 @@
 import java.awt.event.*;
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.regex.Pattern;
 
 class calculator extends JFrame implements ActionListener {
     static Frame calcFrame;
     static JTextField entryField;
+    static ArrayList<String> twoValueOperators = new ArrayList<>(Arrays.asList("+", "-", "*", "/"));
 
     public static void main(String[] args) {
         calcFrame = new JFrame("calculator");
@@ -70,11 +74,11 @@ class calculator extends JFrame implements ActionListener {
         calcFrame.setVisible(true);
     }
 
-    public void actionPerformed(ActionEvent e){
+    public void actionPerformed(ActionEvent e) {
         CalculatorLogic calcLogic = new CalculatorLogic();
         String currentText = entryField.getText();
-        if( e.getActionCommand().equals("^2") || e.getActionCommand().equals("sqrt")){
-            if(!currentText.equals("") && !currentText.contains("+") && !currentText.contains("-") && !currentText.contains("*") && !currentText.contains("/")) {
+        if (e.getActionCommand().equals("^2") || e.getActionCommand().equals("sqrt")) {
+            if (!currentText.equals("") && !currentText.contains("+") && !currentText.contains("-") && !currentText.contains("*") && !currentText.contains("/")) {
                 if (e.getActionCommand().equals("^2")) {
                     entryField.setText(calcLogic.square(currentText));
                 } else {
@@ -82,11 +86,40 @@ class calculator extends JFrame implements ActionListener {
                 }
             }
         }
-        if(e.getActionCommand().equals("=")){
-            //TODO: two value operations
-        }
-        else{
-            if(!e.getActionCommand().equals("^2") && !e.getActionCommand().equals("sqrt")) {
+        if (e.getActionCommand().equals("=")) {
+            if (!currentText.equals("")) {
+                boolean hasOperator = false;
+                String currentChar = "";
+                for (int i = 0; i < currentText.length(); i++) {
+                    currentChar = Character.toString(currentText.charAt(i));
+                    if (twoValueOperators.contains(currentChar)) {
+                        hasOperator = true;
+                        break;
+                    }
+                }
+                if (hasOperator) {
+                    String[] numbers = currentText.split(Pattern.quote(currentChar));
+                    if (numbers.length > 1) {
+                        try {
+                            entryField.setText(calcLogic.twoValueOperation(numbers[0], currentChar, numbers[1]));
+                        } catch (Exception ex) {
+                            throw new RuntimeException(ex);
+                        }
+                    }
+
+                }
+            }
+        } else {
+            if (
+                    (!twoValueOperators.contains(e.getActionCommand())
+                            && !e.getActionCommand().equals("^2")
+                            && !e.getActionCommand().equals("sqrt"))
+                            ||
+                            (twoValueOperators.contains(e.getActionCommand())
+                                    && !currentText.contains("+")
+                                    && !currentText.contains("-")
+                                    && !currentText.contains("*")
+                                    && !currentText.contains("/"))) {
                 entryField.setText(currentText + e.getActionCommand());
             }
         }
