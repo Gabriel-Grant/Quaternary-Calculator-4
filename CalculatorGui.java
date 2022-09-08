@@ -119,7 +119,8 @@ class calculator extends JFrame implements ActionListener {
                                     && !currentText.contains("+")
                                     && !currentText.contains("-")
                                     && !currentText.contains("*")
-                                    && !currentText.contains("/"))) {
+                                    && !currentText.contains("/")
+                                    && !currentText.equals(""))) {
                 entryField.setText(currentText + e.getActionCommand());
             }
         }
