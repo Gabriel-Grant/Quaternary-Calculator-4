@@ -21,4 +21,13 @@ public class CalculatorLogic {
         };
     }
 
+    public String square(String value){
+        int valueDecimal = Integer.parseInt(toDecimal(value));
+        return toQuad(Integer.toString(valueDecimal * valueDecimal));
+    }
+
+    public String squareRoot(String value){
+        int valueDecimal = Integer.parseInt(toDecimal(value));
+        return toQuad(Integer.toString((int)(Math.sqrt(valueDecimal))));
+    }
 }
