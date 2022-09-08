@@ -30,8 +30,8 @@ class calculator extends JFrame implements ActionListener {
         bs = new JButton("-");
         bd = new JButton("/");
         bm = new JButton("*");
-        bSqr = new JButton("sqrt(x)");
-        bSq = new JButton("x^2");
+        bSqr = new JButton("sqrt");
+        bSq = new JButton("^2");
         bTog = new JButton("dec");
 
         JPanel calcPanel = new JPanel();
@@ -70,7 +70,25 @@ class calculator extends JFrame implements ActionListener {
         calcFrame.setVisible(true);
     }
 
-    public void actionPerformed(ActionEvent e) {
-
+    public void actionPerformed(ActionEvent e){
+        CalculatorLogic calcLogic = new CalculatorLogic();
+        String currentText = entryField.getText();
+        if( e.getActionCommand().equals("^2") || e.getActionCommand().equals("sqrt")){
+            if(!currentText.equals("") && !currentText.contains("+") && !currentText.contains("-") && !currentText.contains("*") && !currentText.contains("/")) {
+                if (e.getActionCommand().equals("^2")) {
+                    entryField.setText(calcLogic.square(currentText));
+                } else {
+                    entryField.setText(calcLogic.squareRoot(currentText));
+                }
+            }
+        }
+        if(e.getActionCommand().equals("=")){
+            //TODO: two value operations
+        }
+        else{
+            if(!e.getActionCommand().equals("^2") && !e.getActionCommand().equals("sqrt")) {
+                entryField.setText(currentText + e.getActionCommand());
+            }
+        }
     }
 }
