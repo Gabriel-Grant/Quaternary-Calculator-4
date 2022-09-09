@@ -9,6 +9,7 @@ class calculator extends JFrame implements ActionListener {
     static Frame calcFrame;
     static JTextField entryField;
     static ArrayList<String> twoValueOperators = new ArrayList<>(Arrays.asList("+", "-", "*", "/"));
+    static boolean isDecimal = false;
 
     public static void main(String[] args) {
         calcFrame = new JFrame("calculator");
@@ -77,52 +78,90 @@ class calculator extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         CalculatorLogic calcLogic = new CalculatorLogic();
         String currentText = entryField.getText();
-        if (e.getActionCommand().equals("^2") || e.getActionCommand().equals("sqrt")) {
-            if (!currentText.equals("") && !currentText.contains("+") && !currentText.contains("-") && !currentText.contains("*") && !currentText.contains("/")) {
+        if ((e.getActionCommand().equals("^2") || e.getActionCommand().equals("sqrt")) && !isDecimal) {
+            if (!currentText.equals("") && !currentText.contains("+") && (!currentText.contains("-") || currentText.charAt(0) == '-') && !currentText.contains("*") && !currentText.contains("/")) {
                 if (e.getActionCommand().equals("^2")) {
                     entryField.setText(calcLogic.square(currentText));
-                } else {
+                } else if(!currentText.contains("-")) {
                     entryField.setText(calcLogic.squareRoot(currentText));
                 }
             }
-        }
-        if (e.getActionCommand().equals("=")) {
+        } else if (e.getActionCommand().equals("=") && !isDecimal) {
             if (!currentText.equals("")) {
-                boolean hasOperator = false;
-                String currentChar = "";
-                for (int i = 0; i < currentText.length(); i++) {
-                    currentChar = Character.toString(currentText.charAt(i));
-                    if (twoValueOperators.contains(currentChar)) {
-                        hasOperator = true;
-                        break;
-                    }
-                }
-                if (hasOperator) {
-                    String[] numbers = currentText.split(Pattern.quote(currentChar));
+                String operator = getOperator(currentText);
+                if (!operator.equals("")) {
+                    String[] numbers = getNumbers(operator, currentText);
                     if (numbers.length > 1) {
                         try {
-                            entryField.setText(calcLogic.twoValueOperation(numbers[0], currentChar, numbers[1]));
+                            entryField.setText(calcLogic.twoValueOperation(numbers[0], operator, numbers[1]));
                         } catch (Exception ex) {
                             throw new RuntimeException(ex);
                         }
                     }
-
                 }
             }
-        } else {
+        } else if (e.getActionCommand().equals("dec")) {
+            if (!currentText.equals("")) {
+                String operator = getOperator(currentText);
+                if(operator.equals("")) {
+                    if(isDecimal) {
+                        entryField.setText(calcLogic.toQuad(currentText));
+                    } else {
+                        entryField.setText(calcLogic.toDecimal(currentText));
+                    }
+                } else {
+                    String[] numbers = getNumbers(operator, currentText);
+                    if(numbers.length > 1) {
+                        if(isDecimal) {
+                            entryField.setText(calcLogic.toQuad(numbers[0]) + operator + calcLogic.toQuad(numbers[1]));
+                        } else {
+                            entryField.setText(calcLogic.toDecimal(numbers[0]) + operator + calcLogic.toDecimal(numbers[1]));
+                        }
+                    } else {
+                        return;
+                    }
+                }
+                isDecimal = !isDecimal;
+            }
+        } else if(!isDecimal) {
             if (
                     (!twoValueOperators.contains(e.getActionCommand())
+                            && !e.getActionCommand().equals("dec")
                             && !e.getActionCommand().equals("^2")
                             && !e.getActionCommand().equals("sqrt"))
                             ||
                             (twoValueOperators.contains(e.getActionCommand())
                                     && !currentText.contains("+")
-                                    && !currentText.contains("-")
+                                    && (!currentText.contains("-") || currentText.charAt(0) == '-')
                                     && !currentText.contains("*")
                                     && !currentText.contains("/")
                                     && !currentText.equals(""))) {
                 entryField.setText(currentText + e.getActionCommand());
             }
+        }
+    }
+
+    private String getOperator(String input) {
+        String currentChar = "";
+        boolean hasOperator = false;
+        for (int i = 1; i < input.length(); i++) {
+            currentChar = Character.toString(input.charAt(i));
+            if (twoValueOperators.contains(currentChar)) {
+                hasOperator = true;
+                break;
+            }
+        }
+        return hasOperator ? currentChar : "";
+    }
+
+    private String[] getNumbers(String operator, String input) {
+        if(!(input.charAt(0) == '-' && operator.equals("-"))) {
+            return input.split(Pattern.quote(operator));
+        } else {
+            input = input.substring(1);
+            String[] numbers = input.split(Pattern.quote(operator));
+            numbers[0] = "-" + numbers[0];
+            return numbers;
         }
     }
 }
