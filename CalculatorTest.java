@@ -103,4 +103,11 @@ public class CalculatorTest {
         assertEquals("1", calc.squareRoot("1"));
         assertEquals("123", calc.squareRoot("23121"));
     }
+
+    @Test
+    public void operationExceptionTest(){
+        assertThrows(Exception.class, () -> {
+                calc.twoValueOperation("10", "&", "10");
+            });
+        }
 }
