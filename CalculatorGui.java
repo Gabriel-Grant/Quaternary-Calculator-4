@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.regex.Pattern;
 
+
+
 class calculator extends JFrame implements ActionListener {
     static Frame calcFrame;
     static JTextField entryField;
@@ -73,6 +75,12 @@ class calculator extends JFrame implements ActionListener {
         calcFrame.add(calcPanel);
         calcFrame.setSize(195, 200);
         calcFrame.setVisible(true);
+        calcFrame.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent we) {
+                System.exit(0);
+            }
+        });
+
     }
 
     public void actionPerformed(ActionEvent e) {
