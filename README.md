@@ -30,4 +30,11 @@ Dan - One unit operations
 JUnit4
 JUnit5.8.1
 
-# Images
+## Images
+![Calc Image](/images/CalcImage.PNG)
+
+![Addition Example](/images/AdditionExample.PNG)
+
+![QuarternaryExample](/images/QuarternaryExample.PNG)
+
+![Decimal Example](/images/DecimalExample.PNG)
