@@ -20,11 +20,11 @@ Hit the toggle button to toggle between quaternary and decimal forms, the GUI wi
 ## Work Allocation:
 Gabriel - GUI design and creation, GitHub repository creation, initial creation of project, README file creation
 
-Jared - Two number operations (addition, subtraction, multiplication, and division)
+Jared - Two number operations (addition, subtraction, multiplication, and division), created the decimal conversion button, and connected two value operations to the GUI
 
-Cameron - Unit Testing (square root and squared functions)
+Cameron - Unit Testing 
 
-Dan - One unit operations
+Dan - One unit operations (square root and squared functions)
 
 ## Dependencies:
 JUnit4
