@@ -31,10 +31,10 @@ JUnit4
 JUnit5.8.1
 
 ## Images
-![Calc Image](/images/CalcImage.PNG)
+![Calc Image](/Images/CalcImage.PNG)
 
-![Addition Example](/images/AdditionExample.PNG)
+![Addition Example](/Images/AdditionExample.PNG)
 
-![QuarternaryExample](/images/QuarternaryExample.PNG)
+![QuarternaryExample](/Images/QuarternaryExample.PNG)
 
-![Decimal Example](/images/DecimalExample.PNG)
+![Decimal Example](/Images/DecimalExample.PNG)
