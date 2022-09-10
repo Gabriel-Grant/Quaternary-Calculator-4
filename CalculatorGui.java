@@ -12,6 +12,7 @@ class calculator extends JFrame implements ActionListener {
     static JTextField entryField;
     static ArrayList<String> twoValueOperators = new ArrayList<>(Arrays.asList("+", "-", "*", "/"));
     static boolean isDecimal = false;
+    static JPanel calcPanel = new JPanel();
 
     public static void main(String[] args) {
         calcFrame = new JFrame("calculator");
@@ -41,7 +42,8 @@ class calculator extends JFrame implements ActionListener {
         bSq = new JButton("^2");
         bTog = new JButton("dec");
 
-        JPanel calcPanel = new JPanel();
+
+
 
         b0.addActionListener(calc);
         b1.addActionListener(calc);
@@ -80,7 +82,6 @@ class calculator extends JFrame implements ActionListener {
                 System.exit(0);
             }
         });
-
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -114,8 +115,10 @@ class calculator extends JFrame implements ActionListener {
                 if(operator.equals("")) {
                     if(isDecimal) {
                         entryField.setText(calcLogic.toQuad(currentText));
+                        calcPanel.setBackground(Color.pink);
                     } else {
                         entryField.setText(calcLogic.toDecimal(currentText));
+                        calcPanel.setBackground(Color.red);
                     }
                 } else {
                     String[] numbers = getNumbers(operator, currentText);
