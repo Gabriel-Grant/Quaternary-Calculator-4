@@ -13,6 +13,7 @@ Select desired number
 Hit desired operation button
 
 Hit the toggle button to toggle between quaternary and decimal forms, the GUI will change from pink to red when switching to signal which version you are currently in. Pink: Quarternary Red: Decimal
+(The operation buttons are disabled when in decimal mode)
 
 ## Meetings:
 9/7 @ 6pm over slack, All attended, discussed work allocation, and how to link everything to the GUI with the logic code
